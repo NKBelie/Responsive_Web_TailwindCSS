@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,291 +42,27 @@
                     backgroundImage: {
                         "noise-pattern": "radial-gradient(circle at 20% 20%, rgba(74, 108, 247, 0.16) 0, rgba(74, 108, 247, 0.05) 18%, transparent 40%), radial-gradient(circle at 80% 0%, rgba(17, 23, 34, 0.08) 0, transparent 30%), linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(74, 108, 247, 0.04) 100%)",
                     },
+                    keyframes: {
+                        fadeInUp: {
+                            "0%": { opacity: "0", transform: "translate3d(0, 20px, 0)" },
+                            "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
+                        },
+                        fadeInRight: {
+                            "0%": { opacity: "0", transform: "translate3d(20px, 0, 0)" },
+                            "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
+                        },
+                    },
+                    animation: {
+                        "fade-in-up": "fadeInUp 1s both",
+                        "fade-in-right": "fadeInRight 1s both",
+                    },
                 },
             },
         };
     </script>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-        }
-
-        .title {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            display: inline-block;
-            transform: translateX(-50%);
-            pointer-events: none;
-            text-align: center;
-            white-space: nowrap;
-            font-size: 40px;
-            font-weight: 800;
-            line-height: 1;
-            background-image: linear-gradient(180deg, rgba(74, 108, 247, 0.4) 0%, rgba(74, 108, 247, 0) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .active.menu-scroll,
-        .submenu-item a.active {
-            color: #4A6CF7;
-        }
-
-        .dark .submenu-item a.active {
-            color: #ffffff;
-        }
-
-        .submenu-item a.active span svg {
-            transform: rotate(180deg);
-        }
-
-        .portfolio-btn-wrapper button.active {
-            text-decoration: underline;
-        }
-
-        .grid-sizer {
-            width: 100%;
-        }
-
-        .surface-card {
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-            backdrop-filter: blur(8px);
-        }
-
-        .dark .surface-card {
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(17, 23, 34, 0.9);
-            box-shadow: none;
-        }
-
-        .placeholder-dark-text::placeholder {
-            color: #79808A;
-        }
-
-        .outline-hidden {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-        }
-
-        span[class~="pr-2"],
-        span[class~="pl-3"] {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tns-controls {
-            position: absolute;
-            bottom: 3.5rem;
-            left: 50%;
-            z-index: 30;
-            display: flex;
-            gap: 1.25rem;
-            transform: translateX(-50%);
-        }
-
-        .tns-controls button {
-            display: flex;
-            height: 2.5rem;
-            width: 2.5rem;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9999px;
-            background: rgba(74, 108, 247, 0.1);
-            color: #4A6CF7;
-            transition: all 0.2s ease;
-        }
-
-        .tns-controls button:hover {
-            background: #4A6CF7;
-            color: #ffffff;
-        }
-
-        .dark .tns-controls button {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-
-        .dark .tns-controls button:hover {
-            background: #4A6CF7;
-        }
-
-        .fadeInUp {
-            animation: fadeInUp 1s both;
-        }
-
-        .fadeInRight {
-            animation: fadeInRight 1s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 20px, 0);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translate3d(20px, 0, 0);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        .tns-outer {
-            padding: 0 !important;
-        }
-
-        .tns-outer [hidden] {
-            display: none !important;
-        }
-
-        .tns-outer [aria-controls],
-        .tns-outer [data-action] {
-            cursor: pointer;
-        }
-
-        .tns-slider {
-            transition: all 0s;
-        }
-
-        .tns-slider > .tns-item {
-            box-sizing: border-box;
-        }
-
-        .tns-horizontal.tns-subpixel {
-            white-space: nowrap;
-        }
-
-        .tns-horizontal.tns-subpixel > .tns-item {
-            display: inline-block;
-            vertical-align: top;
-            white-space: normal;
-        }
-
-        .tns-horizontal.tns-no-subpixel::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .tns-horizontal.tns-no-subpixel > .tns-item {
-            float: left;
-        }
-
-        .tns-horizontal.tns-carousel.tns-no-subpixel > .tns-item {
-            margin-right: -100%;
-        }
-
-        .tns-no-calc {
-            position: relative;
-            left: 0;
-        }
-
-        .tns-gallery {
-            position: relative;
-            left: 0;
-            min-height: 1px;
-        }
-
-        .tns-gallery > .tns-item {
-            position: absolute;
-            left: -100%;
-            transition: transform 0s, opacity 0s;
-        }
-
-        .tns-gallery > .tns-slide-active {
-            position: relative;
-            left: auto !important;
-        }
-
-        .tns-gallery > .tns-moving {
-            transition: all 0.25s;
-        }
-
-        .tns-autowidth {
-            display: inline-block;
-        }
-
-        .tns-lazy-img {
-            opacity: 0.6;
-            transition: opacity 0.6s;
-        }
-
-        .tns-lazy-img.tns-complete {
-            opacity: 1;
-        }
-
-        .tns-ah {
-            transition: height 0s;
-        }
-
-        .tns-ovh {
-            overflow: hidden;
-        }
-
-        .tns-visually-hidden {
-            position: absolute;
-            left: -10000em;
-        }
-
-        .tns-transparent {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #supportCheckbox:checked ~ div span {
-            opacity: 1;
-        }
-
-        @media (min-width: 540px) {
-            .title {
-                font-size: 60px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .grid-sizer {
-                width: 50%;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .title {
-                font-size: 95px;
-            }
-
-            .grid-sizer {
-                width: 33.333333%;
-            }
-
-            .tns-controls {
-                left: 70px;
-                transform: none;
-            }
-        }
-    </style>
 </head>
-<body class="bg-slate-50 text-black transition-colors duration-300 dark:bg-[#0b1220] dark:text-white">
-    <header class="sticky top-0 left-0 z-9999 w-full bg-white/90 shadow-[inset_0_-1px_0_0_rgba(15,23,42,0.08)] backdrop-blur-sm transition dark:bg-[#111722]/90">
+<body class="font-body bg-slate-50 text-black transition-colors duration-300 dark:bg-[#0b1220] dark:text-white">
+    <header class="sticky top-0 left-0 z-99 w-full bg-white/90 shadow-[inset_0_-1px_0_0_rgba(15,23,42,0.08)] backdrop-blur-sm transition dark:bg-[#111722]/90">
         <div class="flex w-full flex-wrap px-5 lg:flex-nowrap lg:items-center lg:px-5 xl:px-10 2xl:px-20">
             <div class="relative z-99 max-w-[250px] lg:w-full xl:max-w-[350px]">
                 <a href="#home" class="inline-block">
@@ -340,17 +76,17 @@
                     <nav>
                         <ul class="navbar flex flex-col items-center justify-center space-y-5 text-center lg:flex-row lg:justify-start lg:space-y-0 lg:space-x-10">
                             <li>
-                                <a href="#home" class="menu-scroll active font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
+                                <a href="#home" class="font-heading text-primary inline-flex items-center justify-center text-center text-base dark:text-white">
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a href="#features" class="menu-scroll font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
+                                <a href="#features" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
                                     Features
                                 </a>
                             </li>
                             <li class="submenu-item group relative">
-                                <a href="javascript:void(0)" class="submenu-taggler font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
                                     Pages
                                     <span class="inline-flex items-center justify-center pl-3">
                                         <svg width="14" height="8" viewBox="0 0 14 8" class="fill-current">
@@ -359,15 +95,15 @@
                                     </span>
                                 </a>
                                 <ul class="submenu hidden space-y-5 bg-white pt-5 transition duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[350px] lg:rounded-sm lg:border lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:bg-transparent dark:lg:border-transparent dark:lg:bg-[#2C3443]">
-                                    <li><a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Blog Grid</a></li>
-                                    <li><a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Blog Details</a></li>
-                                    <li><a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">404 Error</a></li>
-                                    <li><a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Sign In</a></li>
-                                    <li><a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Sign Up</a></li>
+                                    <li><a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Blog Grid</a></li>
+                                    <li><a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Blog Details</a></li>
+                                    <li><a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">404 Error</a></li>
+                                    <li><a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Sign In</a></li>
+                                    <li><a href="#" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">Sign Up</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#support" class="menu-scroll font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
+                                <a href="#support" class="font-heading text-dark-text hover:text-primary inline-flex items-center justify-center text-center text-base dark:hover:text-white">
                                     Support
                                 </a>
                             </li>
@@ -375,10 +111,10 @@
                     </nav>
                 </div>
                 <div class="absolute bottom-0 left-0 flex w-full flex-nowrap items-center justify-between space-x-5 self-end p-5 lg:static lg:w-auto lg:self-center lg:p-0">
-                    <a href="javascript:void(0)" class="w-full whitespace-nowrap rounded-lg bg-blue-600 px-4 py-2 text-center text-white lg:w-auto">
+                    <a href="#" class="w-full whitespace-nowrap rounded-lg bg-blue-600 px-4 py-2 text-center text-white lg:w-auto">
                         Sign In
                     </a>
-                    <a href="javascript:void(0)" class="w-full whitespace-nowrap rounded-lg bg-gray-800 px-4 py-2 text-center text-white lg:w-auto">
+                    <a href="#" class="w-full whitespace-nowrap rounded-lg bg-gray-800 px-4 py-2 text-center text-white lg:w-auto">
                         Sign Up
                     </a>
                 </div>
@@ -401,44 +137,40 @@
         </div>
     </header>
     <section id="home" class="relative z-10 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="mx-4 flex flex-wrap items-center">
-                <div class="w-full px-3 lg:w-1/2">
-                    <div class="max-w-[530px] text-center lg:mb-0 lg:ml-0 lg:text-left">
-                        <span class="wow fadeInUp bg-primary/5 font-heading text-primary mb-8 inline-flex items-center justify-center rounded-full px-5 py-[10px] text-base dark:bg-white/10 dark:text-white" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+        <div class="w-full px-4 items-center">
+            <div class="flex flex-wrap items-center gap-y-12">
+                <div class="w-full px-3 lg:w-1/2 ">
+                    <div class="max-w-[530px] text-center lg:mb-0 lg:ml-0 lg:text-left ">
+                        <span class="animate-fade-in-up bg-primary/5 font-heading text-primary mb-8 inline-flex items-center justify-center rounded-full px-5 py-[10px] text-base dark:bg-white/10 dark:text-white">
                             <span class="bg-primary mr-2 inline-block h-2 w-2 rounded-full"></span>
                             Tailwind Template for Startups
                         </span>
-                        <h1 class="wow fadeInUp font-heading mb-5 text-2xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                        <h1 class="animate-fade-in-up font-heading mb-5 text-2xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                             Digital Solutions for Your
-                            <span class="txt-type inline-flex items-center justify-center underline lg:justify-start" data-wait="3000" data-words="[&quot;Startup&quot;, &quot;SaaS&quot;, &quot;Business&quot;, &quot;Agency&quot;]"><span class="txt">Business</span></span>
+                            <span class="inline-flex items-center justify-center underline lg:justify-start">Business</span>
                         </h1>
-                        <p class="wow fadeInUp text-dark-text mb-12 text-base" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s;">
+                        <p class="animate-fade-in-up text-dark-text mb-12 text-base">
                             Handcrafted Tailwind CSS template for your next - Startup,
                             Business, Agency or SaaS Website. Comes with refreshing design
                             and everything you need to kickstart your next web project.
                         </p>
-                    <div class="wow fadeInUp flex flex-wrap items-center justify-center lg:justify-start" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s;">
-                        <button class="px-4 py-2  text-white rounded-lg">
-                            <a href="#features" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-6 py-[10px] text-base text-white md:px-8 md:py-[14px]">
-                                Get Started
+                    <div class="animate-fade-in-up flex flex-wrap items-center justify-center lg:justify-start">
+                        <a href="#features" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-6 py-[10px] text-base text-white md:px-8 md:py-[14px]">
+                            Get Started
                             <span class="inline-flex items-center justify-center pl-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.172 7L6.808 1.636L8.222 0.222L16 8L8.222 15.778L6.808 14.364L12.172 9H0V7H12.172Z" fill="white"></path>
                                 </svg>
                             </span>
-                            </a>
-                        </button>
-                        <button>
-                            <a href="#about" class="font-heading text-dark hover:text-primary dark:hover:text-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base dark:text-white">
-                                How it Work
-                            </a>
-                        </button>
+                        </a>
+                        <a href="#about" class="font-heading text-dark hover:text-primary dark:hover:text-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base dark:text-white">
+                            How it Work
+                        </a>
                     </div>
                     </div>
                 </div>
-                <div class="w-full px-4 lg:w-1/2">
-                    <div class="wow fadeInRight relative z-30 mx-auto h-[560px] w-full max-w-[700px] lg:ml-0" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                <div class="flex w-full justify-center px-4 lg:w-1/2 lg:justify-end">
+                    <div class="animate-fade-in-right relative z-30 mx-auto h-[420px] w-full max-w-[700px] sm:h-[520px] lg:mx-0 xl:max-w-[820px]">
                         <div class="absolute top-0 right-0 lg:w-11/12">
                             <img src="images/landing 1.jpg" alt="hero-image">
                         </div>
@@ -452,7 +184,7 @@
     </section>
     <section id="features" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
         <div class="relative mx-auto mb-12 max-w-[620px] pt-6 text-center md:mb-20 lg:pt-16">
-            <span class="title"> FEATURES </span>
+            <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> FEATURES </span>
             <h2 class="font-heading text-dark mb-5 text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                 Our Unique &amp; Awesome Core Features
             </h2>
@@ -464,7 +196,7 @@
         </div>
         <div class="-mx-4 flex flex-wrap justify-center px-10">
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto mb-10 max-w-[380px] text-center md:mb-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                <div class="animate-fade-in-up group mx-auto mb-10 max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path d="M3.66663 23.8333H14.6666V38.5H3.66663V23.8333ZM16.5 5.5H27.5V38.5H16.5V5.5Z"></path>
@@ -483,7 +215,7 @@
                 </div>
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto mb-10 max-w-[380px] text-center md:mb-16" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s;">
+                <div class="animate-fade-in-up group mx-auto mb-10 max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path d="M22.9424 2.39982L39.0226 12.0468C39.1585 12.1282 39.271 12.2434 39.3492 12.3813C39.4273 12.5191 39.4684 12.6749 39.4684 12.8333C39.4684 12.9918 39.4273 13.1475 39.3492 13.2854C39.271 13.4232 39.1585 13.5384 39.0226 13.6198L22.0001 23.8333L4.97756 13.6198C4.84161 13.5384 4.72908 13.4232 4.65094 13.2854C4.57281 13.1475 4.53174 12.9918 4.53174 12.8333C4.53174 12.6749 4.57281 12.5191 4.65094 12.3813C4.72908 12.2434 4.84161 12.1282 4.97756 12.0468L21.0559 2.39982C21.341 2.22851 21.6674 2.138 22.0001 2.138C22.3327 2.138 22.6591 2.22851 22.9442 2.39982H22.9424Z"></path>
@@ -502,7 +234,7 @@
                 </div>
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto mb-10 max-w-[380px] text-center md:mb-16" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                <div class="animate-fade-in-up group mx-auto mb-10 max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path d="M36.6667 40.3334H7.33333C6.8471 40.3334 6.38079 40.1402 6.03697 39.7964C5.69315 39.4526 5.5 38.9863 5.5 38.5V14.6667H38.5V38.5C38.5 38.9863 38.3068 39.4526 37.963 39.7964C37.6192 40.1402 37.1529 40.3334 36.6667 40.3334ZM12.8333 20.1667V27.5H20.1667V20.1667H12.8333ZM12.8333 31.1667V34.8334H31.1667V31.1667H12.8333ZM23.8333 22V25.6667H31.1667V22H23.8333Z"></path>
@@ -521,7 +253,7 @@
                 </div>
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto mb-10 max-w-[380px] text-center md:mb-16" data-wow-delay=".35s" style="visibility: visible; animation-delay: 0.35s;">
+                <div class="animate-fade-in-up group mx-auto mb-10 max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path d="M22 3.66663C32.1255 3.66663 40.3333 11.8745 40.3333 22C40.3333 32.1255 32.1255 40.3333 22 40.3333C11.8745 40.3333 3.66663 32.1255 3.66663 22C3.66663 11.8745 11.8745 3.66663 22 3.66663ZM22 7.33329C13.9003 7.33329 7.33329 13.9003 7.33329 22C7.33329 30.0996 13.9003 36.6666 22 36.6666C30.0996 36.6666 36.6666 30.0996 36.6666 22C36.6666 13.9003 30.0996 7.33329 22 7.33329ZM29.777 11.6288L32.3711 14.2211L25.5438 21.0521C25.6245 21.3546 25.6666 21.6718 25.6666 22C25.6666 24.0258 24.0258 25.6666 22 25.6666C19.9741 25.6666 18.3333 24.0258 18.3333 22C18.3333 19.9741 19.9741 18.3333 22 18.3333C22.3281 18.3333 22.6453 18.3755 22.9478 18.4561L29.7788 11.6288H29.777Z"></path>
@@ -540,7 +272,7 @@
                 </div>
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto mb-10 max-w-[380px] text-center md:mb-16" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s;">
+                <div class="animate-fade-in-up group mx-auto mb-10 max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path d="M25.6667 38.5H7.33333C6.8471 38.5 6.38079 38.3068 6.03697 37.963C5.69315 37.6192 5.5 37.1529 5.5 36.6667V18.3333H25.6667V38.5ZM38.5 14.6667H5.5V7.33333C5.5 6.8471 5.69315 6.38079 6.03697 6.03697C6.38079 5.69315 6.8471 5.5 7.33333 5.5H36.6667C37.1529 5.5 37.6192 5.69315 37.963 6.03697C38.3068 6.38079 38.5 6.8471 38.5 7.33333V14.6667Z"></path>
@@ -559,7 +291,7 @@
                 </div>
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div class="wow fadeInUp group mx-auto max-w-[380px] text-center md:mb-16" data-wow-delay=".45s" style="visibility: visible; animation-delay: 0.45s;">
+                <div class="animate-fade-in-up group mx-auto max-w-[380px] text-center md:mb-16">
                     <div class="bg-primary/5 text-primary group-hover:bg-primary dark:group-hover:bg-primary mx-auto mb-6 flex h-[70px] w-[70px] items-center justify-center rounded-full transition group-hover:text-white group-hover:opacity-100 md:mb-9 md:h-[90px] md:w-[90px] dark:bg-white/5 dark:text-white dark:group-hover:opacity-100">
                         <svg width="44" height="44" viewBox="0 0 44 44" class="fill-current">
                             <path opacity="0.5" d="M10.0154 8.12714C13.3421 5.24452 17.598 3.6605 21.9999 3.66664C32.1254 3.66664 40.3332 11.8745 40.3332 22C40.3332 25.916 39.1049 29.546 37.0149 32.5233L31.1665 22H36.6665C36.6668 19.1246 35.8218 16.3126 34.2368 13.9136C32.6517 11.5146 30.3964 9.63443 27.7514 8.50687C25.1063 7.37931 22.1882 7.0541 19.3598 7.57168C16.5314 8.08926 13.9175 9.42679 11.8432 11.418L10.0154 8.12714Z"></path>
@@ -581,7 +313,7 @@
     </section>
     <section id="about" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
         <div class="relative mx-auto mb-12 max-w-[620px] pt-6 text-center md:mb-20 lg:pt-16">
-            <span class="title">
+            <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]">
                 ABOUT US
             </span>
             <h2 class="font-heading text-dark mb-5 text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
@@ -593,7 +325,7 @@
                 ante in maximus.
             </p>
         </div>
-        <div class="wow fadeInUp surface-card relative z-10 overflow-hidden rounded-sm px-8 pt-0 pb-8 md:px-[70px] md:pb-[70px] lg:px-[60px] lg:pb-[60px] xl:px-[70px] xl:pb-[70px]" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+        <div class="animate-fade-in-up border border-slate-200/80 bg-white/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-[8px] dark:border-white/10 dark:bg-[#111722]/90 dark:shadow-none relative z-10 overflow-hidden rounded-sm px-8 pt-0 pb-8 md:px-[70px] md:pb-[70px] lg:px-[60px] lg:pb-[60px] xl:px-[70px] xl:pb-[70px]">
             <div class="bg-noise-pattern absolute top-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40"></div>
             <div class="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2">
                 <svg width="1174" height="560" viewBox="0 0 1174 560" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -613,7 +345,7 @@
                     </defs>
                 </svg>
             </div>
-            <div class="tabButtons flex w-full items-center justify-around">
+            <div class="flex w-full items-center justify-around">
                 <button data-about-tab class="font-heading hover:border-primary hover:text-primary dark:hover:border-primary w-full whitespace-nowrap border-b px-2 pt-8 pb-6 text-base font-medium lg:pt-9 lg:pb-7 dark:border-[#4B4E56] dark:text-white text-primary border-primary dark:border-primary">
                     About Us
                 </button>
@@ -625,7 +357,7 @@
                 </button>
             </div>
             <div class="w-full">
-                <div class="tabPanel" style="display: flex;">
+                <div>
                     <div class="-mx-4 flex w-full flex-wrap items-center pt-[70px]">
                         <div class="w-full px-4 lg:w-1/2">
                             <div class="relative z-30 mb-14 h-[490px] max-w-[600px] lg:mb-0">
@@ -649,7 +381,7 @@
                         <div class="w-full px-4 lg:w-1/2">
                             <div class="max-w-[565px] lg:ml-auto">
                                 <h2 class="font-heading text-dark mb-8 text-2xl font-bold sm:text-[40px] sm:leading-[50px] dark:text-white">
-                                    We are Creative Digital Agency Based in USA
+                                    We are Creative Agency Based in USA
                                 </h2>
                                 <p class="text-dark-text mb-6 text-base">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -674,9 +406,9 @@
         </div>
     </section>
     <section id="team" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                <span class="title"> OUR TEAM </span>
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16">
+                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> OUR TEAM </span>
                 <h2 class="font-heading text-dark mx-auto mb-5 max-w-[620px] text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                     Meet With Our Creative Dedicated Team
                 </h2>
@@ -688,22 +420,22 @@
             </div>
             <div class="-mx-4 flex flex-wrap justify-center">
                 <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-                    <div class="wow fadeInUp xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                    <div class="animate-fade-in-up xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center">
                         <div class="relative mb-8 overflow-hidden rounded-sm">
                             <img src="images/team 1.jpg" alt="team-image" class="w-full">
                                 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                     <div class="flex items-center justify-center space-x-3">
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.6667 11.2501H13.75L14.5834 7.91675H11.6667V6.25008C11.6667 5.39175 11.6667 4.58341 13.3334 4.58341H14.5834V1.78341C14.3117 1.74758 13.2859 1.66675 12.2025 1.66675C9.94004 1.66675 8.33337 3.04758 8.33337 5.58341V7.91675H5.83337V11.2501H8.33337V18.3334H11.6667V11.2501Z" fill="white"></path>
                                         </svg>
                                         </a>
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z" fill="currentColor"></path>
                                         </svg>
                                         </a>
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5.78328 4.16677C5.78306 4.6088 5.60726 5.03263 5.29454 5.34504C4.98182 5.65744 4.55781 5.83282 4.11578 5.8326C3.67376 5.83238 3.24992 5.65657 2.93752 5.34386C2.62511 5.03114 2.44973 4.60713 2.44995 4.1651C2.45017 3.72307 2.62598 3.29924 2.9387 2.98683C3.25141 2.67443 3.67542 2.49905 4.11745 2.49927C4.55948 2.49949 4.98331 2.6753 5.29572 2.98801C5.60812 3.30073 5.78351 3.72474 5.78328 4.16677ZM5.83328 7.06677H2.49995V17.5001H5.83328V7.06677ZM11.1 7.06677H7.78328V17.5001H11.0666V12.0251C11.0666 8.9751 15.0416 8.69177 15.0416 12.0251V17.5001H18.3333V10.8918C18.3333 5.7501 12.45 5.94177 11.0666 8.46677L11.1 7.06677Z" fill="white"></path>
                                         </svg>
@@ -722,22 +454,22 @@
                     </div>
                 </div>
                 <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-                    <div class="wow fadeInUp xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s;">
+                    <div class="animate-fade-in-up xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center">
                         <div class="relative mb-8 overflow-hidden rounded-sm">
                             <img src="images/team 2.jpg" alt="team-image" class="w-full">
                                 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                     <div class="flex items-center justify-center space-x-3">
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.6667 11.2501H13.75L14.5834 7.91675H11.6667V6.25008C11.6667 5.39175 11.6667 4.58341 13.3334 4.58341H14.5834V1.78341C14.3117 1.74758 13.2859 1.66675 12.2025 1.66675C9.94004 1.66675 8.33337 3.04758 8.33337 5.58341V7.91675H5.83337V11.2501H8.33337V18.3334H11.6667V11.2501Z" fill="white"></path>
                                         </svg>
                                         </a>
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z" fill="currentColor"></path>
                                         </svg>
                                         </a>
-                                        <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                        <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5.78328 4.16677C5.78306 4.6088 5.60726 5.03263 5.29454 5.34504C4.98182 5.65744 4.55781 5.83282 4.11578 5.8326C3.67376 5.83238 3.24992 5.65657 2.93752 5.34386C2.62511 5.03114 2.44973 4.60713 2.44995 4.1651C2.45017 3.72307 2.62598 3.29924 2.9387 2.98683C3.25141 2.67443 3.67542 2.49905 4.11745 2.49927C4.55948 2.49949 4.98331 2.6753 5.29572 2.98801C5.60812 3.30073 5.78351 3.72474 5.78328 4.16677ZM5.83328 7.06677H2.49995V17.5001H5.83328V7.06677ZM11.1 7.06677H7.78328V17.5001H11.0666V12.0251C11.0666 8.9751 15.0416 8.69177 15.0416 12.0251V17.5001H18.3333V10.8918C18.3333 5.7501 12.45 5.94177 11.0666 8.46677L11.1 7.06677Z" fill="white"></path>
                                         </svg>
@@ -756,22 +488,22 @@
                     </div>
                 </div>
                 <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-                    <div class="wow fadeInUp xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                    <div class="animate-fade-in-up xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center">
                         <div class="relative mb-8 overflow-hidden rounded-sm">
                             <img src="images/team 3.jpg" alt="team-image" class="w-full">
                             <div class="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                 <div class="flex items-center justify-center space-x-3">
-                                    <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                    <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.6667 11.2501H13.75L14.5834 7.91675H11.6667V6.25008C11.6667 5.39175 11.6667 4.58341 13.3334 4.58341H14.5834V1.78341C14.3117 1.74758 13.2859 1.66675 12.2025 1.66675C9.94004 1.66675 8.33337 3.04758 8.33337 5.58341V7.91675H5.83337V11.2501H8.33337V18.3334H11.6667V11.2501Z" fill="white"></path>
                                     </svg>
                                     </a>
-                                    <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                    <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z" fill="currentColor"></path>
                                     </svg>
                                     </a>
-                                    <a href="javascript:void(0)" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
+                                    <a href="#" name="social-icon" aria-label="social-icon" class="hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-sm transition hover:border-transparent hover:opacity-100">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5.78328 4.16677C5.78306 4.6088 5.60726 5.03263 5.29454 5.34504C4.98182 5.65744 4.55781 5.83282 4.11578 5.8326C3.67376 5.83238 3.24992 5.65657 2.93752 5.34386C2.62511 5.03114 2.44973 4.60713 2.44995 4.1651C2.45017 3.72307 2.62598 3.29924 2.9387 2.98683C3.25141 2.67443 3.67542 2.49905 4.11745 2.49927C4.55948 2.49949 4.98331 2.6753 5.29572 2.98801C5.60812 3.30073 5.78351 3.72474 5.78328 4.16677ZM5.83328 7.06677H2.49995V17.5001H5.83328V7.06677ZM11.1 7.06677H7.78328V17.5001H11.0666V12.0251C11.0666 8.9751 15.0416 8.69177 15.0416 12.0251V17.5001H18.3333V10.8918C18.3333 5.7501 12.45 5.94177 11.0666 8.46677L11.1 7.06677Z" fill="white"></path>
                                     </svg>
@@ -793,9 +525,9 @@
         </div>
     </section>
     <section id="portfolio" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                <span class="title"> PORTFOLIO </span>
+        <div class="w-full px-4">
+            <div class="relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16">
+                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> PORTFOLIO </span>
                 <h2 class="font-heading text-dark mx-auto mb-5 max-w-[500px] text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                     Explore Our Latest Case Studies
                 </h2>
@@ -806,25 +538,10 @@
                 </p>
             </div>
             <div class="w-full">
-                <div class="portfolio-btn-wrapper wow fadeInUp mb-16 flex items-center justify-center overflow-x-auto pb-2" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                    <button class="active font-heading text-dark px-5 text-base whitespace-nowrap dark:text-white" data-filter="*">
-                    All
-                    </button>
-                    <button class="font-heading text-dark px-5 text-base whitespace-nowrap dark:text-white" data-filter=".branding">
-                    Branding Strategy
-                    </button>
-                    <button class="font-heading text-dark px-5 text-base whitespace-nowrap dark:text-white" data-filter=".digital">
-                    Digital Experiences
-                    </button>
-                    <button class="font-heading text-dark px-5 text-base whitespace-nowrap dark:text-white" data-filter=".ecom">
-                    eCommerce
-                    </button>
-                </div>
-                <div class="portfolio-grid -mx-4 flex flex-wrap" style="position: relative; height: 675.7px;">
-                    <div class="grid-sizer"></div>
-                    <div class="grid-item ecom w-full px-4 lg:w-2/3" style="position: absolute; left: 0px; top: 0px;">
-                    <div class="wow fadeInUp group relative mb-10 overflow-hidden rounded-sm" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                        <img src="images/pro 1.jpg" alt="portfolio-image" class="w-full">
+                <div class="-mx-4 flex flex-wrap">
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                    <div class="animate-fade-in-up group relative mb-10 overflow-hidden rounded-sm">
+                        <img src="images/pro 1.jpg" alt="portfolio-image" class="h-[280px] w-full object-cover">
                         <div class="absolute bottom-8 left-5 flex translate-y-8 items-center justify-between rounded-sm bg-black/30 px-4 py-5 opacity-0 backdrop-blur-[30px] transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:left-8 sm:px-6 lg:left-5 lg:px-4 xl:px-6 2xl:left-8">
                         <div class="border-r border-[#e9e9e9]/30 pr-4 sm:pr-5 lg:pr-4 xl:pr-5">
                             <h3 class="font-heading text-base font-medium text-white sm:text-xl lg:text-base xl:text-xl">
@@ -835,7 +552,7 @@
                             </p>
                         </div>
                         <div class="pl-4 sm:pl-5 lg:pl-4 xl:pl-5">
-                            <a href="javascript:void(0)" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
+                            <a href="#" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M13.4767 9.16689L9.00671 4.69689L10.185 3.51855L16.6667 10.0002L10.185 16.4819L9.00671 15.3036L13.4767 10.8336H3.33337V9.16689H13.4767Z"></path>
                             </svg>
@@ -844,9 +561,9 @@
                         </div>
                     </div>
                     </div>
-                    <div class="grid-item branding w-full px-4 md:w-1/2 lg:w-1/3" style="position: absolute; left: 879.974px; top: 0px;">
-                    <div class="wow fadeInUp group relative mb-10 overflow-hidden rounded-sm" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s;">
-                        <img src="images/pro 2.jpg" alt="portfolio-image" class="w-full">
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                    <div class="animate-fade-in-up group relative mb-10 overflow-hidden rounded-sm">
+                        <img src="images/pro 2.jpg" alt="portfolio-image" class="h-[280px] w-full object-cover">
                         <div class="absolute bottom-8 left-5 flex translate-y-8 items-center justify-between rounded-sm bg-black/30 px-4 py-5 opacity-0 backdrop-blur-[30px] transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:left-8 sm:px-6 lg:left-5 lg:px-4 xl:px-6 2xl:left-8">
                         <div class="border-r border-[#e9e9e9]/30 pr-4 sm:pr-5 lg:pr-4 xl:pr-5">
                             <h3 class="font-heading text-base font-medium text-white sm:text-xl lg:text-base xl:text-xl">
@@ -857,7 +574,7 @@
                             </p>
                         </div>
                         <div class="pl-4 sm:pl-5 lg:pl-4 xl:pl-5">
-                            <a href="javascript:void(0)" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
+                            <a href="#" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M13.4767 9.16689L9.00671 4.69689L10.185 3.51855L16.6667 10.0002L10.185 16.4819L9.00671 15.3036L13.4767 10.8336H3.33337V9.16689H13.4767Z"></path>
                             </svg>
@@ -866,9 +583,9 @@
                         </div>
                     </div>
                     </div>
-                    <div class="grid-item digital w-full px-4 md:w-1/2 lg:w-1/3" style="position: absolute; left: 0px; top: 334.95px;">
-                    <div class="wow fadeInUp group relative mb-10 overflow-hidden rounded-sm" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
-                        <img src="images/pro 3.jpg" alt="portfolio-image" class="w-full">
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                    <div class="animate-fade-in-up group relative mb-10 overflow-hidden rounded-sm">
+                        <img src="images/pro 3.jpg" alt="portfolio-image" class="h-[280px] w-full object-cover">
                         <div class="absolute bottom-8 left-5 flex translate-y-8 items-center justify-between rounded-sm bg-black/30 px-4 py-5 opacity-0 backdrop-blur-[30px] transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:left-8 sm:px-6 lg:left-5 lg:px-4 xl:px-6 2xl:left-8">
                         <div class="border-r border-[#e9e9e9]/30 pr-4 sm:pr-5 lg:pr-4 xl:pr-5">
                             <h3 class="font-heading text-base font-medium text-white sm:text-xl lg:text-base xl:text-xl">
@@ -879,7 +596,7 @@
                             </p>
                         </div>
                         <div class="pl-4 sm:pl-5 lg:pl-4 xl:pl-5">
-                            <a href="javascript:void(0)" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
+                            <a href="#" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M13.4767 9.16689L9.00671 4.69689L10.185 3.51855L16.6667 10.0002L10.185 16.4819L9.00671 15.3036L13.4767 10.8336H3.33337V9.16689H13.4767Z"></path>
                             </svg>
@@ -888,9 +605,9 @@
                         </div>
                     </div>
                     </div>
-                    <div class="grid-item ecom w-full px-4 md:w-1/2 lg:w-1/3" style="position: absolute; left: 439.987px; top: 334.95px;">
-                    <div class="wow fadeInUp group relative mb-10 overflow-hidden rounded-sm" data-wow-delay=".35s" style="visibility: visible; animation-delay: 0.35s;">
-                        <img src="images/pro 4.jpg" alt="portfolio-image" class="w-full">
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+                    <div class="animate-fade-in-up group relative mb-10 overflow-hidden rounded-sm">
+                        <img src="images/pro 4.jpg" alt="portfolio-image" class="h-[280px] w-full object-cover">
                         <div class="absolute bottom-8 left-5 flex translate-y-8 items-center justify-between rounded-sm bg-black/30 px-4 py-5 opacity-0 backdrop-blur-[30px] transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:left-8 sm:px-6 lg:left-5 lg:px-4 xl:px-6 2xl:left-8">
                         <div class="border-r border-[#e9e9e9]/30 pr-4 sm:pr-5 lg:pr-4 xl:pr-5">
                             <h3 class="font-heading text-base font-medium text-white sm:text-xl lg:text-base xl:text-xl">
@@ -901,7 +618,7 @@
                             </p>
                         </div>
                         <div class="pl-4 sm:pl-5 lg:pl-4 xl:pl-5">
-                            <a href="javascript:void(0)" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
+                            <a href="#" class="dark:hover:bg-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full bg-[#f8f8f8]/15 text-white hover:opacity-100 dark:hover:opacity-100">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M13.4767 9.16689L9.00671 4.69689L10.185 3.51855L16.6667 10.0002L10.185 16.4819L9.00671 15.3036L13.4767 10.8336H3.33337V9.16689H13.4767Z"></path>
                             </svg>
@@ -911,9 +628,8 @@
                     </div>
                     </div>
                 </div>
-                <div class="wow fadeInUp w-full pt-10 text-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                    <button class="px-4 py-2 text-white rounded-lg">
-                        <a href="javascript:void(0)" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
+                <div class="animate-fade-in-up w-full pt-10 text-center">
+                    <a href="#" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
                     See More Projects
                     <span class="inline-flex items-center justify-center pl-3">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -921,15 +637,14 @@
                         </svg>
                     </span>
                     </a>
-                    </button>
                 </div>
             </div>
         </div>
     </section>
     <section id="testimonial" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                <span class="title"> Testimonial </span>
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up relative mx-auto mb-12 pt-6 text-center md:mb-20 lg:pt-16">
+                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> Testimonial </span>
                 <h2 class="font-heading text-dark mx-auto mb-5 max-w-[450px] text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                     What Our Clients Say About Us
                 </h2>
@@ -940,8 +655,8 @@
                 </p>
             </div>
             <div class="w-full px-4">
-                <div class="wow fadeInUp surface-card drop-shadow-light relative z-10 overflow-hidden rounded-sm px-10 pt-[60px] pb-28 sm:px-14 md:p-[70px] md:pb-28 lg:pb-[70px] dark:drop-shadow-none" data-wow-delay=".3s">
-                    <div class="testimonial-active">
+                <div class="animate-fade-in-up border border-slate-200/80 bg-white/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-[8px] dark:border-white/10 dark:bg-[#111722]/90 dark:shadow-none drop-shadow-light relative z-10 overflow-hidden rounded-sm px-10 pt-[60px] pb-28 sm:px-14 md:p-[70px] md:pb-28 lg:pb-[70px] dark:drop-shadow-none">
+                    <div>
                         <div class="testimonial-item">
                             <div class="-mx-4 flex flex-wrap items-center gap-y-10">
                                 <div class="order-last w-full px-4 lg:order-first lg:w-1/2">
@@ -1067,13 +782,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tns-controls" aria-label="Testimonial navigation">
-                        <button type="button" data-testimonial-prev aria-label="Previous testimonial">
+                    <div class="absolute bottom-14 left-1/2 z-30 flex -translate-x-1/2 gap-5 lg:left-[70px] lg:translate-x-0" aria-label="Testimonial navigation">
+                        <button type="button" data-testimonial-prev aria-label="Previous testimonial" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition hover:bg-primary hover:text-white dark:bg-white/10 dark:text-white dark:hover:bg-primary">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M6.52329 10.8331L10.9933 15.3031L9.81496 16.4814L3.3333 9.99978L9.81496 3.51811L10.9933 4.69645L6.52329 9.16645L16.6666 9.16645L16.6666 10.8331L6.52329 10.8331Z"></path>
                             </svg>
                         </button>
-                        <button type="button" data-testimonial-next aria-label="Next testimonial">
+                        <button type="button" data-testimonial-next aria-label="Next testimonial" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition hover:bg-primary hover:text-white dark:bg-white/10 dark:text-white dark:hover:bg-primary">
                             <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                                 <path d="M13.4767 9.16689L9.00671 4.69689L10.185 3.51855L16.6667 10.0002L10.185 16.4819L9.00671 15.3036L13.4767 10.8336H3.33337V9.16689H13.4767Z"></path>
                             </svg>
@@ -1084,8 +799,8 @@
         </div>
     </section>
     <section class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp relative mx-auto mb-16 max-w-[620px] text-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up relative mx-auto mb-16 max-w-[620px] text-center">
                 <h2 class="font-heading text-dark mb-5 text-[38px] leading-tight font-semibold dark:text-white">
                     Trusted by Global Brands
                 </h2>
@@ -1096,26 +811,26 @@
                 </p>
             </div>
             <div class="border-b pb-24 dark:border-[#2E333D]">
-                <div class="wow fadeInUp -mx-4 flex flex-wrap" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                <div class="animate-fade-in-up -mx-4 flex flex-wrap">
                     <div class="w-full px-4">
                         <div class="flex flex-wrap items-center justify-center">
-                            <a href="javascript:void(0)" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
+                            <a href="#" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
                                 <img src="images/uideck.svg" alt="image" class="hidden h-10 w-full dark:block">
                                 <img src="images/uideck-2.svg" alt="image" class="h-10 w-full dark:hidden">
                             </a>
-                            <a href="javascript:void(0)" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
+                            <a href="#" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
                                 <img src="images/tailadmin.svg" alt="image" class="hidden h-10 w-full dark:block">
                                 <img src="images/tailadmin-2.svg" alt="image" class="h-10 w-full dark:hidden">
                             </a>
-                            <a href="javascript:void(0)" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
+                            <a href="#" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
                                 <img src="images/graygrids.svg" alt="image" class="hidden h-10 w-full dark:block">
                                 <img src="images/graygrids-2.svg" alt="image" class="h-10 w-full dark:hidden">
                             </a>
-                            <a href="javascript:void(0)" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
+                            <a href="#" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
                                 <img src="images/lineicons.svg" alt="image" class="hidden h-10 w-full dark:block">
                                 <img src="images/lineicons-2.svg" alt="image" class="h-10 w-full dark:hidden">
                             </a>
-                            <a href="javascript:void(0)" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
+                            <a href="#" class="mx-4 flex w-[150px] items-center justify-center py-5 2xl:w-[180px]">
                                 <img src="images/plainadmin.svg" alt="image" class="hidden h-10 w-full dark:block">
                                 <img src="images/plainadmin-2.svg" alt="image" class="h-10 w-full dark:hidden">
                             </a>
@@ -1126,9 +841,9 @@
         </div>
     </section>
     <section id="pricing" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp relative mb-12 w-full pt-10 text-center md:mb-20 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                <span class="title"> Pricing Plan </span>
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up relative mb-12 w-full pt-10 text-center md:mb-20 lg:pt-16">
+                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> Pricing Plan </span>
                 <h2 class="font-heading text-dark mx-auto mb-5 max-w-[600px] text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                     Affordable Pricing With Simple Plans
                 </h2>
@@ -1138,7 +853,7 @@
                     ante in maximus.
                 </p>
             </div>
-            <div class="surface-card drop-shadow-light relative z-10 flex flex-wrap justify-center overflow-hidden rounded-sm dark:drop-shadow-none">
+            <div class="border border-slate-200/80 bg-white/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-[8px] dark:border-white/10 dark:bg-[#111722]/90 dark:shadow-none drop-shadow-light relative z-10 flex flex-wrap justify-center overflow-hidden rounded-sm dark:drop-shadow-none">
                 <div class="bg-noise-pattern absolute top-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40"></div>
                 <div class="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2">
                     <svg width="1174" height="560" viewBox="0 0 1174 560" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1159,7 +874,7 @@
                     </svg>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3">
-                    <div class="wow fadeInUp pt-10 pb-20 text-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                    <div class="animate-fade-in-up pt-10 pb-20 text-center">
                         <div class="border-b dark:border-[#2E333D]">
                             <h3 class="font-heading text-dark mb-2 text-3xl font-medium dark:text-white">
                             Free
@@ -1208,7 +923,7 @@
                                     <path d="M9.99999 15.172L19.192 5.979L20.607 7.393L9.99999 18L3.63599 11.636L5.04999 10.222L9.99999 15.172Z"></path>
                                     </svg>
                                 </span>
-                                Custom Branding Strategy
+                                Custom Strategy
                             </p>
                             <p class="text-dark-text flex items-center text-base">
                                 <span class="inline-block pr-2">
@@ -1219,7 +934,7 @@
                                 Free SEO Tools
                             </p>
                         </div>
-                            <a href="javascript:void(0)" class="bg-dark-text font-heading hover:bg-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
+                            <a href="#" class="bg-dark-text font-heading hover:bg-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
                                 Join This Plan
                                 <span class="inline-flex items-center justify-center pl-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1230,7 +945,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 sm:border-l lg:w-1/3 lg:border-x dark:border-[#2E333D]">
-                    <div class="wow fadeInUp pt-10 pb-20 text-center" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                    <div class="animate-fade-in-up pt-10 pb-20 text-center">
                         <div class="border-b dark:border-[#2E333D]">
                             <h3 class="font-heading text-dark mb-2 text-3xl font-medium dark:text-white">
                                 Basic
@@ -1279,7 +994,7 @@
                                 <path d="M9.99999 15.172L19.192 5.979L20.607 7.393L9.99999 18L3.63599 11.636L5.04999 10.222L9.99999 15.172Z"></path>
                                 </svg>
                             </span>
-                            Custom Branding Strategy
+                            Custom Strategy
                             </p>
                             <p class="text-dark-text flex items-center text-base">
                             <span class="inline-block pr-2">
@@ -1290,7 +1005,7 @@
                             Free SEO Tools
                             </p>
                         </div>
-                        <a href="javascript:void(0)" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
+                        <a href="#" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
                             Join This Plan
                             <span class="inline-flex items-center justify-center pl-3">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1301,7 +1016,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3">
-                    <div class="wow fadeInUp pt-10 pb-20 text-center" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s;">
+                    <div class="animate-fade-in-up pt-10 pb-20 text-center">
                         <div class="border-b dark:border-[#2E333D]">
                             <h3 class="font-heading text-dark mb-2 text-3xl font-medium dark:text-white">
                             Premium
@@ -1350,7 +1065,7 @@
                                 <path d="M9.99999 15.172L19.192 5.979L20.607 7.393L9.99999 18L3.63599 11.636L5.04999 10.222L9.99999 15.172Z"></path>
                                 </svg>
                             </span>
-                            Custom Branding Strategy
+                            Custom Strategy
                             </p>
                             <p class="text-dark-text flex items-center text-base">
                             <span class="inline-block pr-2 text-[#00CB99]">
@@ -1361,7 +1076,7 @@
                             Free SEO Tools
                             </p>
                         </div>
-                        <a href="javascript:void(0)" class="bg-dark-text font-heading hover:bg-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
+                        <a href="#" class="bg-dark-text font-heading hover:bg-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white">
                             Join This Plan
                             <span class="inline-flex items-center justify-center pl-3">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1383,9 +1098,9 @@
         </div>
     </section>
     <section id="blog" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp relative mx-auto mb-12 max-w-[620px] pt-6 text-center md:mb-20 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                <span class="title"> BLOGS </span>
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up relative mx-auto mb-12 max-w-[620px] pt-6 text-center md:mb-20 lg:pt-16">
+                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> BLOGS </span>
                 <h2 class="font-heading text-dark mb-5 text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                     Latest News &amp; Articles From Our Blog
                 </h2>
@@ -1398,9 +1113,9 @@
             <div class="w-full border-b pb-20 dark:border-[#2E333D]">
                 <div class="-mx-4 flex flex-wrap">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                        <div class="wow fadeInUp mb-10" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                        <div class="animate-fade-in-up mb-10">
                             <div class="relative mb-8 overflow-hidden rounded-sm">
-                                <a href="javascript:void(0)" class="block">
+                                <a href="#" class="block">
                                     <img src="images/blog 1.jpg" alt="blog-image" class="w-full">
                                 </a>
                                 <span class="bg-primary font-heading absolute top-5 left-5 rounded-sm px-4 py-[6px] text-sm font-medium text-white">
@@ -1427,7 +1142,7 @@
                                     </p>
                                 </div>
                                 <h3>
-                                    <a href="javascript:void(0)" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
+                                    <a href="#" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
                                     Free advertising for your online business
                                     </a>
                                 </h3>
@@ -1435,9 +1150,9 @@
                         </div>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                    <div class="wow fadeInUp mb-10" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s;">
+                    <div class="animate-fade-in-up mb-10">
                         <div class="relative mb-8 overflow-hidden rounded-sm">
-                            <a href="javascript:void(0)" class="block">
+                            <a href="#" class="block">
                                 <img src="images/blog 2.jpg" alt="blog-image" class="w-full">
                             </a>
                             <span class="bg-primary font-heading absolute top-5 left-5 rounded-sm px-4 py-[6px] text-sm font-medium text-white">
@@ -1464,7 +1179,7 @@
                                 </p>
                             </div>
                             <h3>
-                                <a href="javascript:void(0)" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
+                                <a href="#" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
                                 9 simple ways to improve your design skills
                                 </a>
                             </h3>
@@ -1472,9 +1187,9 @@
                     </div>
                 </div>
                 <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                    <div class="wow fadeInUp mb-10" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s;">
+                    <div class="animate-fade-in-up mb-10">
                         <div class="relative mb-8 overflow-hidden rounded-sm">
-                            <a href="javascript:void(0)" class="block">
+                            <a href="#" class="block">
                                 <img src="images/blog 3.jpg" alt="blog-image" class="w-full">
                             </a>
                             <span class="bg-primary font-heading absolute top-5 left-5 rounded-sm px-4 py-[6px] text-sm font-medium text-white">
@@ -1501,7 +1216,7 @@
                                 </p>
                             </div>
                             <h3>
-                                <a href="javascript:void(0)" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
+                                <a href="#" class="font-heading text-dark hover:text-primary dark:hover:text-primary text-xl font-medium md:text-2xl lg:text-xl xl:text-2xl dark:text-white">
                                 Tips to quickly improve your coding speed.
                                 </a>
                             </h3>
@@ -1513,13 +1228,13 @@
         </div>
     </section>
     <section id="support" class="relative z-40 overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
+        <div class="w-full px-4">
             <div class="-mx-4 flex flex-wrap justify-center">
                 <div class="w-full px-4 xl:w-10/12">
                     <div class="flex flex-wrap items-center border-b pb-14 lg:pb-0 dark:border-[#2E333D]">
                         <div class="w-full px-4 lg:w-1/2">
-                            <div class="wow fadeInUp relative mb-12 max-w-[500px] pt-6 md:mb-14 lg:pt-16" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-                                <span class="title"> SUPPORT </span>
+                            <div class="animate-fade-in-up relative mb-12 max-w-[500px] pt-6 md:mb-14 lg:pt-16">
+                                <span class="pointer-events-none absolute top-0 left-1/2 inline-block -translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-primary/40 to-primary/0 bg-clip-text text-center text-[40px] font-extrabold leading-none text-transparent sm:text-[60px] lg:text-[95px]"> SUPPORT </span>
                                 <h2 class="font-heading text-dark mb-5 text-3xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                                     Need Any Help? Say hello
                                 </h2>
@@ -1530,7 +1245,7 @@
                             </div>
                         </div>
                         <div class="w-full px-4 lg:w-1/2">
-                            <div class="wow fadeInUp flex items-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                            <div class="animate-fade-in-up flex items-center">
                                 <span class="bg-dark mr-10 h-1 w-full max-w-[200px] dark:bg-white"></span>
                                 <a href="mailto:info@gostartup.com" class="font-heading text-dark text-xl md:text-3xl lg:text-xl xl:text-3xl dark:text-white">
                                     info@gostartup.com
@@ -1538,7 +1253,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wow fadeInUp -mx-4 flex flex-wrap pt-12" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+                    <div class="animate-fade-in-up -mx-4 flex flex-wrap pt-12">
                         <div class="w-full px-4 md:w-1/2 lg:w-1/4">
                             <div class="mb-6">
                                 <h3 class="font-heading text-dark mb-2 text-base sm:text-xl dark:text-white">
@@ -1571,22 +1286,22 @@
                         </div>
                         <div class="w-full px-4 md:w-1/2 lg:w-1/4">
                             <div class="mb-6 flex items-center space-x-5 lg:justify-end">
-                                <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                                <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                                     <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                                     <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z"></path>
                                     </svg>
                                 </a>
-                                <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                                <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z" fill="currentColor"></path>
                                     </svg>
                                 </a>
-                                <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                                <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                                     <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                                     <path d="M6.93994 5.00002C6.93968 5.53046 6.72871 6.03906 6.35345 6.41394C5.97819 6.78883 5.46938 6.99929 4.93894 6.99902C4.40851 6.99876 3.89991 6.78779 3.52502 6.41253C3.15014 6.03727 2.93968 5.52846 2.93994 4.99802C2.94021 4.46759 3.15117 3.95899 3.52644 3.5841C3.9017 3.20922 4.41051 2.99876 4.94094 2.99902C5.47137 2.99929 5.97998 3.21026 6.35486 3.58552C6.72975 3.96078 6.94021 4.46959 6.93994 5.00002ZM6.99994 8.48002H2.99994V21H6.99994V8.48002ZM13.3199 8.48002H9.33994V21H13.2799V14.43C13.2799 10.77 18.0499 10.43 18.0499 14.43V21H21.9999V13.07C21.9999 6.90002 14.9399 7.13002 13.2799 10.16L13.3199 8.48002Z"></path>
                                     </svg>
                                 </a>
-                                <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                                <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                                     <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                                     <path d="M7.443 5.34961C8.082 5.34961 8.673 5.39961 9.213 5.54761C9.70302 5.63765 10.1708 5.82244 10.59 6.09161C10.984 6.33861 11.279 6.68561 11.475 7.13061C11.672 7.57561 11.77 8.12061 11.77 8.71361C11.77 9.40661 11.623 9.99961 11.279 10.4446C10.984 10.8906 10.492 11.2856 9.902 11.5826C10.738 11.8306 11.377 12.2756 11.77 12.8686C12.164 13.4626 12.41 14.2046 12.41 15.0456C12.41 15.7386 12.262 16.3316 12.016 16.8266C11.77 17.3216 11.377 17.7666 10.934 18.0636C10.4528 18.382 9.92084 18.616 9.361 18.7556C8.771 18.9046 8.181 19.0036 7.591 19.0036H1V5.34961H7.443ZM7.049 10.8896C7.59 10.8896 8.033 10.7416 8.377 10.4946C8.721 10.2476 8.869 9.80161 8.869 9.25761C8.869 8.96061 8.819 8.66361 8.721 8.46661C8.623 8.26861 8.475 8.11961 8.279 7.97161C8.082 7.87261 7.885 7.77361 7.639 7.72461C7.393 7.67461 7.148 7.67461 6.852 7.67461H4V10.8906H7.05L7.049 10.8896ZM7.197 16.7276C7.492 16.7276 7.787 16.6776 8.033 16.6286C8.28138 16.5814 8.51628 16.48 8.721 16.3316C8.92139 16.1868 9.08903 16.0015 9.213 15.7876C9.311 15.5406 9.41 15.2436 9.41 14.8976C9.41 14.2046 9.213 13.7096 8.82 13.3636C8.426 13.0666 7.885 12.9186 7.246 12.9186H4V16.7286H7.197V16.7276ZM16.689 16.6776C17.082 17.0736 17.672 17.2716 18.459 17.2716C19 17.2716 19.492 17.1236 19.885 16.8766C20.279 16.5796 20.525 16.2826 20.623 15.9856H23.033C22.639 17.1726 22.049 18.0136 21.263 18.5576C20.475 19.0526 19.541 19.3496 18.41 19.3496C17.6864 19.3518 16.9688 19.2175 16.295 18.9536C15.6887 18.7262 15.148 18.3524 14.721 17.8656C14.2643 17.4102 13.9267 16.8494 13.738 16.2326C13.492 15.5896 13.393 14.8976 13.393 14.1056C13.393 13.3636 13.492 12.6716 13.738 12.0276C13.9745 11.4077 14.3245 10.8373 14.77 10.3456C15.213 9.90061 15.754 9.50561 16.344 9.25761C17.0007 8.99367 17.7022 8.8592 18.41 8.86161C19.246 8.86161 19.984 9.01061 20.623 9.35661C21.263 9.70261 21.754 10.0986 22.148 10.6926C22.5499 11.2631 22.8494 11.8993 23.033 12.5726C23.131 13.2646 23.18 13.9576 23.131 14.7486H16C16 15.5406 16.295 16.2826 16.689 16.6786V16.6776ZM19.787 11.4836C19.443 11.1376 18.902 10.9396 18.262 10.9396C17.82 10.9396 17.475 11.0386 17.18 11.1866C16.885 11.3356 16.689 11.5336 16.492 11.7316C16.311 11.9229 16.1912 12.1638 16.148 12.4236C16.098 12.6716 16.049 12.8686 16.049 13.0666H20.475C20.377 12.3246 20.131 11.8306 19.787 11.4836ZM15.459 6.28961H20.967V7.62561H15.46V6.28961H15.459Z"></path>
                                     </svg>
@@ -1597,14 +1312,14 @@
                 </div>
             </div>
             <div class="mx-auto max-w-[780px] pt-[130px]">
-                <form class="wow fadeInUp" data-wow-delay=".2s" action="https://formbold.com/s/unique_form_id" method="POST" style="visibility: visible; animation-delay: 0.2s;">
+                <form class="animate-fade-in-up" action="https://formbold.com/s/unique_form_id" method="POST">
                     <div class="-mx-4 flex flex-wrap">
                         <div class="w-full px-4 sm:w-1/2">
                             <div class="mb-12">
                                 <label for="name" class="font-heading text-dark mb-3 block text-base dark:text-white">
                                     Your Name
                                 </label>
-                                <input type="text" name="name" id="name" placeholder="Full Name" class="text-dark placeholder-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline-hidden dark:border-[#2C3443] dark:text-white dark:focus:border-white">
+                                <input type="text" name="name" id="name" placeholder="Full Name" class="text-dark placeholder:text-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline outline-2 outline-offset-2 outline-transparent dark:border-[#2C3443] dark:text-white dark:focus:border-white">
                             </div>
                         </div>
                         <div class="w-full px-4 sm:w-1/2">
@@ -1612,7 +1327,7 @@
                                 <label for="email" class="font-heading text-dark mb-3 block text-base dark:text-white">
                                     Email Address
                                 </label>
-                                <input type="email" name="email" id="email" placeholder="Email Address" class="text-dark placeholder-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline-hidden dark:border-[#2C3443] dark:text-white dark:focus:border-white">
+                                <input type="email" name="email" id="email" placeholder="Email Address" class="text-dark placeholder:text-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline outline-2 outline-offset-2 outline-transparent dark:border-[#2C3443] dark:text-white dark:focus:border-white">
                             </div>
                         </div>
                         <div class="w-full px-4 sm:w-1/2">
@@ -1620,7 +1335,7 @@
                                 <label for="phone" class="font-heading text-dark mb-3 block text-base dark:text-white">
                                     Phone (Optional)
                                 </label>
-                                <input type="text" name="phone" id="phone" placeholder="Phone Number" class="text-dark placeholder-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline-hidden dark:border-[#2C3443] dark:text-white dark:focus:border-white">
+                                <input type="text" name="phone" id="phone" placeholder="Phone Number" class="text-dark placeholder:text-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline outline-2 outline-offset-2 outline-transparent dark:border-[#2C3443] dark:text-white dark:focus:border-white">
                             </div>
                         </div>
                         <div class="w-full px-4 sm:w-1/2">
@@ -1628,7 +1343,7 @@
                                 <label for="subject" class="font-heading text-dark mb-3 block text-base dark:text-white">
                                     Subject
                                 </label>
-                                <input type="text" name="subject" id="subject" placeholder="Type Subject" class="text-dark placeholder-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline-hidden dark:border-[#2C3443] dark:text-white dark:focus:border-white">
+                                <input type="text" name="subject" id="subject" placeholder="Type Subject" class="text-dark placeholder:text-dark-text focus:border-primary w-full border-b bg-transparent py-5 text-base font-medium outline outline-2 outline-offset-2 outline-transparent dark:border-[#2C3443] dark:text-white dark:focus:border-white">
                             </div>
                         </div>
                         <div class="w-full px-4">
@@ -1636,15 +1351,15 @@
                             <label for="message" class="font-heading text-dark mb-3 block text-base dark:text-white">
                                 Message
                             </label>
-                            <textarea rows="4" name="message" id="message" placeholder="Type Message" class="text-dark placeholder-dark-text focus:border-primary w-full resize-none border-b bg-transparent py-5 text-base font-medium outline-hidden dark:border-[#2C3443] dark:text-white dark:focus:border-white"></textarea>
+                            <textarea rows="4" name="message" id="message" placeholder="Type Message" class="text-dark placeholder:text-dark-text focus:border-primary w-full resize-none border-b bg-transparent py-5 text-base font-medium outline outline-2 outline-offset-2 outline-transparent dark:border-[#2C3443] dark:text-white dark:focus:border-white"></textarea>
                         </div>
                     </div>
                     <div class="w-full px-4">
                         <div class="mb-12">
                             <label for="supportCheckbox" class="text-dark-text hover:text-primary flex cursor-pointer select-none">
                                 <div class="relative">
-                                <input type="checkbox" id="supportCheckbox" class="sr-only">
-                                <div class="box mt-1 mr-4 flex h-5 w-5 items-center justify-center rounded-sm border dark:border-[#414652]">
+                                <input type="checkbox" id="supportCheckbox" class="peer sr-only">
+                                <div class="box mt-1 mr-4 flex h-5 w-5 items-center justify-center rounded-sm border peer-checked:[&>span]:opacity-100 dark:border-[#414652]">
                                     <span class="opacity-0">
                                     <svg width="11" height="8" viewBox="0 0 11 8" fill="none" class="stroke-current">
                                         <path d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z" stroke-width="0.4"></path>
@@ -1668,8 +1383,8 @@
         </div>
     </section>
     <section id="cta" class="px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
-        <div class="px-4 xl:container">
-            <div class="wow fadeInUp surface-card drop-shadow-light relative overflow-hidden bg-cover bg-center px-10 py-[60px] sm:px-[70px] dark:drop-shadow-none" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
+        <div class="w-full px-4">
+            <div class="animate-fade-in-up border border-slate-200/80 bg-white/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-[8px] dark:border-white/10 dark:bg-[#111722]/90 dark:shadow-none drop-shadow-light relative overflow-hidden bg-cover bg-center px-10 py-[60px] sm:px-[70px] dark:drop-shadow-none">
                 <div class="bg-noise-pattern absolute top-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40"></div>
             <div class="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2">
                 <svg width="1215" height="259" viewBox="0 0 1215 259" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1702,7 +1417,7 @@
                 </div>
                 <div class="w-full px-4 lg:w-1/3">
                     <div class="text-center lg:text-right ">
-                        <a href="javascript:void(0)" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white bg-blue-600">
+                        <a href="#" class="bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-8 py-[14px] text-base text-white bg-blue-600">
                         Get Started Now
                         </a>
                     </div>
@@ -1711,8 +1426,8 @@
             </div>
         </div>
     </section>
-    <footer class="wow fadeInUp px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s;">
-        <div class="px-4 xl:container">
+    <footer class="animate-fade-in-up px-5 py-20 sm:px-8 sm:py-24 lg:px-20 lg:py-[100px]">
+        <div class="w-full px-4">
             <div class="-mx-4 flex flex-wrap">
                 <div class="w-full px-4 sm:w-1/2 md:w-5/12 lg:w-3/12 xl:w-3/12">
                     <div class="mb-20 max-w-[330px]">
@@ -1724,22 +1439,22 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </p>
                     <div class="flex items-center space-x-5">
-                        <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                        <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                         <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                             <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z"></path>
                         </svg>
                         </a>
-                        <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                        <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z" fill="currentColor"></path>
                         </svg>
                         </a>
-                        <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                        <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                         <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                             <path d="M6.93994 5.00002C6.93968 5.53046 6.72871 6.03906 6.35345 6.41394C5.97819 6.78883 5.46938 6.99929 4.93894 6.99902C4.40851 6.99876 3.89991 6.78779 3.52502 6.41253C3.15014 6.03727 2.93968 5.52846 2.93994 4.99802C2.94021 4.46759 3.15117 3.95899 3.52644 3.5841C3.9017 3.20922 4.41051 2.99876 4.94094 2.99902C5.47137 2.99929 5.97998 3.21026 6.35486 3.58552C6.72975 3.96078 6.94021 4.46959 6.93994 5.00002ZM6.99994 8.48002H2.99994V21H6.99994V8.48002ZM13.3199 8.48002H9.33994V21H13.2799V14.43C13.2799 10.77 18.0499 10.43 18.0499 14.43V21H21.9999V13.07C21.9999 6.90002 14.9399 7.13002 13.2799 10.16L13.3199 8.48002Z"></path>
                         </svg>
                         </a>
-                        <a href="javascript:void(0)" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
+                        <a href="#" name="social-link" aria-label="social-link" class="text-dark-text hover:text-primary dark:hover:text-white">
                         <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                             <path d="M7.443 5.34961C8.082 5.34961 8.673 5.39961 9.213 5.54761C9.70302 5.63765 10.1708 5.82244 10.59 6.09161C10.984 6.33861 11.279 6.68561 11.475 7.13061C11.672 7.57561 11.77 8.12061 11.77 8.71361C11.77 9.40661 11.623 9.99961 11.279 10.4446C10.984 10.8906 10.492 11.2856 9.902 11.5826C10.738 11.8306 11.377 12.2756 11.77 12.8686C12.164 13.4626 12.41 14.2046 12.41 15.0456C12.41 15.7386 12.262 16.3316 12.016 16.8266C11.77 17.3216 11.377 17.7666 10.934 18.0636C10.4528 18.382 9.92084 18.616 9.361 18.7556C8.771 18.9046 8.181 19.0036 7.591 19.0036H1V5.34961H7.443ZM7.049 10.8896C7.59 10.8896 8.033 10.7416 8.377 10.4946C8.721 10.2476 8.869 9.80161 8.869 9.25761C8.869 8.96061 8.819 8.66361 8.721 8.46661C8.623 8.26861 8.475 8.11961 8.279 7.97161C8.082 7.87261 7.885 7.77361 7.639 7.72461C7.393 7.67461 7.148 7.67461 6.852 7.67461H4V10.8906H7.05L7.049 10.8896ZM7.197 16.7276C7.492 16.7276 7.787 16.6776 8.033 16.6286C8.28138 16.5814 8.51628 16.48 8.721 16.3316C8.92139 16.1868 9.08903 16.0015 9.213 15.7876C9.311 15.5406 9.41 15.2436 9.41 14.8976C9.41 14.2046 9.213 13.7096 8.82 13.3636C8.426 13.0666 7.885 12.9186 7.246 12.9186H4V16.7286H7.197V16.7276ZM16.689 16.6776C17.082 17.0736 17.672 17.2716 18.459 17.2716C19 17.2716 19.492 17.1236 19.885 16.8766C20.279 16.5796 20.525 16.2826 20.623 15.9856H23.033C22.639 17.1726 22.049 18.0136 21.263 18.5576C20.475 19.0526 19.541 19.3496 18.41 19.3496C17.6864 19.3518 16.9688 19.2175 16.295 18.9536C15.6887 18.7262 15.148 18.3524 14.721 17.8656C14.2643 17.4102 13.9267 16.8494 13.738 16.2326C13.492 15.5896 13.393 14.8976 13.393 14.1056C13.393 13.3636 13.492 12.6716 13.738 12.0276C13.9745 11.4077 14.3245 10.8373 14.77 10.3456C15.213 9.90061 15.754 9.50561 16.344 9.25761C17.0007 8.99367 17.7022 8.8592 18.41 8.86161C19.246 8.86161 19.984 9.01061 20.623 9.35661C21.263 9.70261 21.754 10.0986 22.148 10.6926C22.5499 11.2631 22.8494 11.8993 23.033 12.5726C23.131 13.2646 23.18 13.9576 23.131 14.7486H16C16 15.5406 16.295 16.2826 16.689 16.6786V16.6776ZM19.787 11.4836C19.443 11.1376 18.902 10.9396 18.262 10.9396C17.82 10.9396 17.475 11.0386 17.18 11.1866C16.885 11.3356 16.689 11.5336 16.492 11.7316C16.311 11.9229 16.1912 12.1638 16.148 12.4236C16.098 12.6716 16.049 12.8686 16.049 13.0666H20.475C20.377 12.3246 20.131 11.8306 19.787 11.4836ZM15.459 6.28961H20.967V7.62561H15.46V6.28961H15.459Z"></path>
                         </svg>
@@ -1755,17 +1470,17 @@
 
                         <ul class="space-y-4">
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Product
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white  ">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white  ">
                                     Careers
                                     <span class="bg-primary font-heading ml-4 rounded-sm px-2 py-1 text-xs text-white bg-blue-600">
                                     Hiring
@@ -1773,7 +1488,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Pricing
                                 </a>
                             </li>
@@ -1788,22 +1503,22 @@
 
                         <ul class="space-y-4">
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Company
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Press media
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Our Blog
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
+                                <a href="#" class="font-heading text-dark-text hover:text-primary text-base dark:hover:text-white">
                                     Contact Us
                                 </a>
                             </li>
@@ -1844,7 +1559,7 @@
                         Subscribe to receive future updates
                     </p>
                     <form class="relative">
-                        <input type="email" name="email" id="email" placeholder="Email address" class="placeholder:opacity-40 text-dark-text focus:border-primary w-full rounded-sm border py-3 pr-12 pl-5 text-base outline-hidden dark:border-transparent dark:bg-[#2C3443]">
+                        <input type="email" name="email" id="email" placeholder="Email address" class="placeholder:opacity-40 text-dark-text focus:border-primary w-full rounded-sm border py-3 pr-12 pl-5 text-base outline outline-2 outline-offset-2 outline-transparent dark:border-transparent dark:bg-[#2C3443]">
                         <button class="text-dark-text absolute top-0 right-0 flex h-full w-12 items-center justify-center border-l dark:border-[#1F2633]">
                         <svg width="20" height="20" viewBox="0 0 20 20" class="fill-current">
                             <path d="M3.1175 1.17367L18.5025 9.63533C18.5678 9.6713 18.6223 9.72414 18.6602 9.78834C18.6982 9.85255 18.7182 9.92576 18.7182 10.0003C18.7182 10.0749 18.6982 10.1481 18.6602 10.2123C18.6223 10.2765 18.5678 10.3294 18.5025 10.3653L3.1175 18.827C3.05406 18.8619 2.98262 18.8797 2.91023 18.8785C2.83783 18.8774 2.76698 18.8575 2.70465 18.8206C2.64232 18.7838 2.59066 18.7313 2.55478 18.6684C2.51889 18.6056 2.50001 18.5344 2.5 18.462V1.53867C2.50001 1.46626 2.51889 1.39511 2.55478 1.33222C2.59066 1.26934 2.64232 1.21689 2.70465 1.18005C2.76698 1.1432 2.83783 1.12324 2.91023 1.12212C2.98262 1.121 3.05406 1.13877 3.1175 1.17367ZM4.16667 10.8337V16.3478L15.7083 10.0003L4.16667 3.65283V9.167H8.33333V10.8337H4.16667Z"></path>
@@ -1858,13 +1573,13 @@
             <div class="-mx-4 flex flex-wrap py-5 md:py-7">
                 <div class="w-full px-4 md:w-1/2 lg:w-2/3">
                     <div class="mb-5 flex items-center justify-center space-x-5 border-b pb-5 md:mb-0 md:justify-start md:border-0 md:pb-0 dark:border-[#2E333D]">
-                        <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base">
+                        <a href="#" class="font-heading text-dark-text hover:text-primary text-base">
                         English
                         </a>
-                        <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base">
+                        <a href="#" class="font-heading text-dark-text hover:text-primary text-base">
                         Privacy Policy
                         </a>
-                        <a href="javascript:void(0)" class="font-heading text-dark-text hover:text-primary text-base">
+                        <a href="#" class="font-heading text-dark-text hover:text-primary text-base">
                         Support
                         </a>
                     </div>
@@ -1881,75 +1596,79 @@
         </div>
     </footer>
     <a
-      href="#home"
-      id="backToTop"
-      class="hover:shadow-signUp bg-primary fixed right-8 bottom-8 left-auto z-999 hidden h-10 w-10 items-center justify-center rounded-xs text-white shadow-md transition"
-      aria-label="Back to top"
-    >
-      <span class="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"></span>
-    </a>
+        href="#home"
+        id="backToTop"
+        class="hover:shadow-signUp bg-primary fixed right-8 bottom-8 left-auto z-999 hidden h-10 w-10 items-center justify-center rounded-xs text-white shadow-md transition"
+        aria-label="Back to top"
+        >
+        <span class="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"></span>
+        </a>
 
-    <script>
-      const html = document.documentElement;
-      const themeToggle = document.querySelector("#themeToggle");
-      const moonIcon = document.querySelector("#themeIconMoon");
-      const sunIcon = document.querySelector("#themeIconSun");
-      const backToTop = document.querySelector("#backToTop");
-      const aboutTabs = document.querySelectorAll("[data-about-tab]");
-      const testimonialItems = document.querySelectorAll(".testimonial-item");
-      const testimonialPrev = document.querySelector("[data-testimonial-prev]");
-      const testimonialNext = document.querySelector("[data-testimonial-next]");
-      let testimonialIndex = 0;
+        <script>
+        const html = document.documentElement;
+        const themeToggle = document.querySelector("#themeToggle");
+        const moonIcon = document.querySelector("#themeIconMoon");
+        const sunIcon = document.querySelector("#themeIconSun");
+        const backToTop = document.querySelector("#backToTop");
+        const aboutTabs = document.querySelectorAll("[data-about-tab]");
+        const testimonialItems = document.querySelectorAll(".testimonial-item");
+        const testimonialPrev = document.querySelector("[data-testimonial-prev]");
+        const testimonialNext = document.querySelector("[data-testimonial-next]");
+        let testimonialIndex = 0;
 
-      function setTheme(theme) {
-        html.classList.toggle("dark", theme === "dark");
-        moonIcon.classList.toggle("hidden", theme === "dark");
-        sunIcon.classList.toggle("hidden", theme !== "dark");
-        localStorage.setItem("theme", theme);
-      }
+        function setTheme(theme) {
+            html.classList.toggle("dark", theme === "dark");
+            moonIcon.classList.toggle("hidden", theme === "dark");
+            sunIcon.classList.toggle("hidden", theme !== "dark");
+            localStorage.setItem("theme", theme);
+        }
 
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(savedTheme || (prefersDark ? "dark" : "light"));
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(savedTheme || (prefersDark ? "dark" : "light"));
 
-      themeToggle.addEventListener("click", function () {
-        setTheme(html.classList.contains("dark") ? "light" : "dark");
-      });
-
-      window.addEventListener("scroll", function () {
-        backToTop.classList.toggle("hidden", window.scrollY <= 300);
-        backToTop.classList.toggle("flex", window.scrollY > 300);
-      });
-
-      aboutTabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          aboutTabs.forEach(function (item) {
-            item.classList.remove("text-primary", "border-primary", "dark:border-primary");
-          });
-
-          tab.classList.add("text-primary", "border-primary", "dark:border-primary");
+        themeToggle.addEventListener("click", function () {
+            setTheme(html.classList.contains("dark") ? "light" : "dark");
         });
-      });
 
-      function showTestimonial(index) {
-        testimonialItems.forEach(function (item, itemIndex) {
-          item.classList.toggle("hidden", itemIndex !== index);
+        window.addEventListener("scroll", function () {
+            backToTop.classList.toggle("hidden", window.scrollY <= 300);
+            backToTop.classList.toggle("flex", window.scrollY > 300);
         });
-      }
 
-      testimonialPrev.addEventListener("click", function () {
-        testimonialIndex =
-          (testimonialIndex - 1 + testimonialItems.length) % testimonialItems.length;
-        showTestimonial(testimonialIndex);
-      });
+        aboutTabs.forEach(function (tab) {
+            tab.addEventListener("click", function () {
+            aboutTabs.forEach(function (item) {
+                item.classList.remove("text-primary", "border-primary", "dark:border-primary");
+            });
 
-      testimonialNext.addEventListener("click", function () {
-        testimonialIndex = (testimonialIndex + 1) % testimonialItems.length;
-        showTestimonial(testimonialIndex);
-      });
+            tab.classList.add("text-primary", "border-primary", "dark:border-primary");
+            });
+        });
+
+        function showTestimonial(index) {
+            testimonialItems.forEach(function (item, itemIndex) {
+            item.classList.toggle("hidden", itemIndex !== index);
+            });
+        }
+
+        testimonialPrev.addEventListener("click", function () {
+            testimonialIndex =
+            (testimonialIndex - 1 + testimonialItems.length) % testimonialItems.length;
+            showTestimonial(testimonialIndex);
+        });
+
+        testimonialNext.addEventListener("click", function () {
+            testimonialIndex = (testimonialIndex + 1) % testimonialItems.length;
+            showTestimonial(testimonialIndex);
+        });
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
